@@ -210,7 +210,38 @@ const WebRTCCall = (() => {
     }
   }
 
-  // Handle incoming signaling message from SSE
+  let lastSignalTime = Date.now();
+  let signalPollId = null;
+
+  async function pollSignals() {
+    try {
+      const res = await fetch(`/api/signal?since=${lastSignalTime}`);
+      const data = await res.json();
+      if (data && data.signals) {
+        for (const sig of data.signals) {
+          if (sig.timestamp > lastSignalTime) {
+            lastSignalTime = sig.timestamp;
+            handleSignal(sig);
+          }
+        }
+      }
+    } catch (e) {}
+  }
+
+  function startSignalPolling() {
+    if (signalPollId) clearInterval(signalPollId);
+    lastSignalTime = Date.now();
+    signalPollId = setInterval(pollSignals, 2000);
+  }
+
+  function stopSignalPolling() {
+    if (signalPollId) {
+      clearInterval(signalPollId);
+      signalPollId = null;
+    }
+  }
+
+  // Handle incoming signaling message
   function handleSignal(msg) {
     const myId = window.SecretApp ? window.SecretApp.getUserId() : 'user';
     if (msg.sender === myId) return; // Ignore own echoes
@@ -233,6 +264,8 @@ const WebRTCCall = (() => {
     toggleMute,
     toggleVideo,
     endCall,
-    handleSignal
+    handleSignal,
+    startSignalPolling,
+    stopSignalPolling
   };
 })();

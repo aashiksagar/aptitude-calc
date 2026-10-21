@@ -195,7 +195,7 @@ const ChatModule = (() => {
   async function handlePanicWipe() {
     if (confirm('EMERGENCY: Purge all chat messages immediately?')) {
       try {
-        await fetch('/api/panic-wipe', { method: 'POST' });
+        await fetch('/api/panic', { method: 'POST' });
         messages = [];
         renderMessages();
       } catch (err) {
@@ -366,9 +366,26 @@ const ChatModule = (() => {
     }, 1000);
   }
 
+  let chatPollingId = null;
+
+  function startPolling() {
+    if (chatPollingId) clearInterval(chatPollingId);
+    // Poll messages every 2.5s while chat is unlocked for snappy response
+    chatPollingId = setInterval(loadMessages, 2500);
+  }
+
+  function stopPolling() {
+    if (chatPollingId) {
+      clearInterval(chatPollingId);
+      chatPollingId = null;
+    }
+  }
+
   return {
     init,
     loadMessages,
+    startPolling,
+    stopPolling,
     onNewMessage,
     onMessagePurged,
     onPanicWiped

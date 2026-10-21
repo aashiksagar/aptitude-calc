@@ -24,6 +24,11 @@ const SecretApp = (() => {
     setupSecretSettings();
     fetchStatus();
 
+    // Regular status poll every 8s for v1.0.x unread indicator
+    setInterval(() => {
+      if (!isUnlocked) fetchStatus();
+    }, 8000);
+
     // Init chat module
     ChatModule.init();
   }
@@ -163,6 +168,8 @@ const SecretApp = (() => {
 
     resetInactivityTimer();
     ChatModule.loadMessages();
+    ChatModule.startPolling();
+    WebRTCCall.startSignalPolling();
 
     // Clear calculator display so nobody sees the PIN
     calcInput = '0';
@@ -172,6 +179,8 @@ const SecretApp = (() => {
   function lockChat() {
     isUnlocked = false;
     clearTimeout(inactivityTimer);
+    ChatModule.stopPolling();
+    WebRTCCall.stopSignalPolling();
 
     // End any active WebRTC calls immediately
     WebRTCCall.endCall(true);
