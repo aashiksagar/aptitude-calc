@@ -1,5 +1,0 @@
-{
-  "rewrites": [
-    { "source": "/api/panic-wipe", "destination": "/api/panic" }
-  ]
-}

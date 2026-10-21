@@ -2,9 +2,8 @@
   "name": "aptitude-calc-chat",
   "version": "1.0.0",
   "description": "Scientific Calculator & Aptitude Formula Sheet disguised secret E2EE chat",
-  "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node local-server.js"
   },
   "keywords": ["calculator", "privacy", "e2ee", "chat"],
   "author": "",
