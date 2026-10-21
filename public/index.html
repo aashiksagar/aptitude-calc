@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Aptitude Formula Sheet & Scientific Calculator</title>
+  <meta name="description" content="Engineering aptitude formulas, quick solvers, and scientific calculator tool.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1e1e24">
+</head>
+<body>
+
+  <!-- ============================================== -->
+  <!-- DISGUISE CONTAINER: Aptitude & Calculator      -->
+  <!-- ============================================== -->
+  <div id="disguiseContainer" class="disguise-wrapper">
+    <header class="app-header">
+      <div class="header-branding">
+        <span class="icon">📐</span>
+        <h1>Aptitude & Engineering Toolkit</h1>
+      </div>
+      <div class="nav-tabs">
+        <button id="tabBtnCalc" class="nav-tab active">Scientific Calc</button>
+        <button id="tabBtnAptitude" class="nav-tab">Aptitude Cheat Sheet</button>
+      </div>
+    </header>
+
+    <!-- SECTION 1: Scientific Calculator -->
+    <main id="scientificCalcSection" class="calc-section">
+      <div class="calc-card">
+        <div class="calc-display-container">
+          <div id="calcSubDisplay" class="calc-sub-display"></div>
+          <div id="calcMainDisplay" class="calc-main-display">0</div>
+        </div>
+
+        <div class="calc-keypad">
+          <!-- Scientific row 1 -->
+          <button id="btnRadDeg" class="calc-btn fn-btn">RAD</button>
+          <button class="calc-btn fn-btn" data-val="sin">sin</button>
+          <button class="calc-btn fn-btn" data-val="cos">cos</button>
+          <button class="calc-btn fn-btn" data-val="tan">tan</button>
+          <button class="calc-btn fn-btn" data-val="pi">π</button>
+          <button class="calc-btn fn-btn" data-val="e">e</button>
+
+          <!-- Scientific row 2 -->
+          <button class="calc-btn fn-btn" data-val="ln">ln</button>
+          <button class="calc-btn fn-btn" data-val="log">log</button>
+          <button class="calc-btn fn-btn" data-val="sqrt">√</button>
+          <button class="calc-btn fn-btn" data-val="pow">^</button>
+          <button class="calc-btn fn-btn" data-val="(">(</button>
+          <button class="calc-btn fn-btn" data-val=")">)</button>
+
+          <!-- Numbers & Standard Ops -->
+          <button class="calc-btn num-btn" data-val="7">7</button>
+          <button class="calc-btn num-btn" data-val="8">8</button>
+          <button class="calc-btn num-btn" data-val="9">9</button>
+          <button class="calc-btn op-btn" data-val="/">÷</button>
+          <button class="calc-btn del-btn" data-val="DEL">DEL</button>
+          <button class="calc-btn ac-btn" data-val="AC">AC</button>
+
+          <button class="calc-btn num-btn" data-val="4">4</button>
+          <button class="calc-btn num-btn" data-val="5">5</button>
+          <button class="calc-btn num-btn" data-val="6">6</button>
+          <button class="calc-btn op-btn" data-val="*">×</button>
+          <button class="calc-btn fn-btn" data-val="%">%</button>
+          <button class="calc-btn fn-btn" data-val="1/x">1/x</button>
+
+          <button class="calc-btn num-btn" data-val="1">1</button>
+          <button class="calc-btn num-btn" data-val="2">2</button>
+          <button class="calc-btn num-btn" data-val="3">3</button>
+          <button class="calc-btn op-btn" data-val="-">−</button>
+          <button class="calc-btn num-btn" data-val="0">0</button>
+          <button class="calc-btn num-btn" data-val=".">.</button>
+
+          <button class="calc-btn op-btn" data-val="+">+</button>
+          <button class="calc-btn eq-btn span-2" data-val="=">=</button>
+        </div>
+      </div>
+
+      <!-- Disguised Version / Unread Indicator -->
+      <footer class="disguise-footer">
+        <span id="calcVersionBadge" class="version-watermark">Aptitude Suite Engine v1.0.0</span>
+      </footer>
+    </main>
+
+    <!-- SECTION 2: Aptitude Formulas Cheat Sheet -->
+    <main id="aptitudeSection" class="aptitude-section hidden">
+      <div class="formula-grid">
+        <div class="formula-card">
+          <h3>🏎️ Speed, Time & Distance</h3>
+          <p class="formula-math">Speed = Distance / Time</p>
+          <p class="formula-sub">Convert: 1 km/hr = 5/18 m/sec</p>
+          <div class="quick-solver">
+            <input type="number" id="inputDist" placeholder="Dist (km)">
+            <input type="number" id="inputTime" placeholder="Time (hr)">
+            <button id="btnSolveSpeed" class="solver-btn">Calculate</button>
+            <div id="outSpeed" class="solver-result"></div>
+          </div>
+        </div>
+
+        <div class="formula-card">
+          <h3>💰 Compound Interest</h3>
+          <p class="formula-math">A = P(1 + r/100)<sup>t</sup></p>
+          <p class="formula-sub">CI = Total Amount - Principal</p>
+          <div class="quick-solver">
+            <input type="number" id="inputPrincipal" placeholder="P (₹)">
+            <input type="number" id="inputRate" placeholder="Rate (%)">
+            <input type="number" id="inputYears" placeholder="Time (yr)">
+            <button id="btnSolveCI" class="solver-btn">Calculate</button>
+            <div id="outCI" class="solver-result"></div>
+          </div>
+        </div>
+
+        <div class="formula-card">
+          <h3>⏳ Work & Time</h3>
+          <p class="formula-math">1/A + 1/B = 1/Total Time</p>
+          <p class="formula-sub">If A does work in X days and B in Y days, together = (X×Y)/(X+Y) days.</p>
+        </div>
+
+        <div class="formula-card">
+          <h3>🎲 Probability & Permutations</h3>
+          <p class="formula-math">P(E) = n(E) / n(S)</p>
+          <p class="formula-sub"><sup>n</sup>P<sub>r</sub> = n! / (n - r)! | <sup>n</sup>C<sub>r</sub> = n! / [r!(n - r)!]</p>
+        </div>
+      </div>
+      <footer class="disguise-footer">
+        <span class="version-watermark">Academic Aptitude Reference Standard 2026</span>
+      </footer>
+    </main>
+  </div>
+
+
+  <!-- ============================================== -->
+  <!-- SECRET CHAT CONTAINER                          -->
+  <!-- ============================================== -->
+  <div id="chatView" class="chat-container hidden">
+    <!-- Chat Header -->
+    <header class="chat-header">
+      <div class="peer-info">
+        <div class="peer-avatar">🛡️</div>
+        <div>
+          <h2 class="peer-title">Private Room</h2>
+          <span class="peer-status">E2EE • Self-destruct in 5m</span>
+        </div>
+      </div>
+
+      <div class="chat-actions">
+        <button id="callAudioBtn" class="action-btn" title="Encrypted Voice Call">📞</button>
+        <button id="callVideoBtn" class="action-btn" title="Encrypted Video Call">📹</button>
+        <button id="chatSettingsBtn" class="action-btn" title="Settings (User ID, PIN, Key)">⚙️</button>
+        <button id="panicWipeBtn" class="action-btn panic-btn" title="Panic Wipe All Messages">⚠️</button>
+        <button id="chatQuickLockBtn" class="action-btn lock-btn" title="Instant Lock to Calculator">🔒 Lock</button>
+      </div>
+    </header>
+
+    <!-- Chat Messages Flow -->
+    <div id="chatMessagesList" class="messages-flow"></div>
+
+    <!-- Security Hint Bar -->
+    <div class="security-banner">
+      <span>💡 Double-tap anywhere or lock screen to instantly return to calculator.</span>
+    </div>
+
+    <!-- Chat Input Controls -->
+    <footer class="chat-footer">
+      <label class="input-btn" title="Send Photo">
+        📷
+        <input type="file" id="imageUploadInput" accept="image/*" class="hidden-input">
+      </label>
+      <button id="micRecordBtn" class="input-btn mic-btn" title="Hold/Click to record voice note">🎙️</button>
+      <input type="text" id="chatInput" placeholder="Type an encrypted message..." autocomplete="off">
+      <button id="chatSendBtn" class="send-btn">➤</button>
+    </footer>
+  </div>
+
+
+  <!-- ============================================== -->
+  <!-- MODALS: Incoming Call, Active Call, Settings   -->
+  <!-- ============================================== -->
+
+  <!-- Incoming Call Modal -->
+  <div id="incomingCallModal" class="modal-overlay hidden">
+    <div class="modal-card call-alert">
+      <div class="pulsing-call-icon">📞</div>
+      <h3 id="incomingCallerText">Incoming Call...</h3>
+      <p>Peer-to-peer encrypted call</p>
+      <div class="call-actions-row">
+        <button id="acceptCallBtn" class="call-btn btn-accept">Accept</button>
+        <button id="rejectCallBtn" class="call-btn btn-reject">Decline</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Active Call Modal -->
+  <div id="activeCallModal" class="modal-overlay hidden">
+    <div class="active-call-window">
+      <div class="video-container">
+        <video id="remoteVideo" autoplay playsinline class="remote-video"></video>
+        <video id="localVideo" autoplay playsinline muted class="local-video"></video>
+      </div>
+      <div class="call-hud">
+        <span id="callStatusText">Connected</span>
+        <div class="call-controls">
+          <button id="muteCallBtn" class="hud-btn">🎤 Mute</button>
+          <button id="videoToggleCallBtn" class="hud-btn">📹 Camera</button>
+          <button id="endCallBtn" class="hud-btn btn-hangup">🔴 End Call</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Secret Settings Modal -->
+  <div id="settingsModal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <h3>🔒 Security & Identity Settings</h3>
+      <p class="modal-desc">These settings stay in temporary memory for this browser session.</p>
+
+      <div class="form-group">
+        <label>Your Display Name:</label>
+        <input type="text" id="settingsUserId" placeholder="e.g. Alex">
+      </div>
+
+      <div class="form-group">
+        <label>Calculator Secret PIN (Type code + '=' to unlock):</label>
+        <input type="text" id="settingsPin" placeholder="Default: 1337">
+      </div>
+
+      <div class="form-group">
+        <label>Shared Encryption Key (Must match your friend's key):</label>
+        <input type="password" id="settingsPassphrase" placeholder="Shared secret passphrase">
+      </div>
+
+      <div class="modal-buttons">
+        <button id="saveSettingsBtn" class="btn-primary">Save Changes</button>
+        <button id="closeSettingsBtn" class="btn-secondary">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="crypto.js"></script>
+  <script src="webrtc.js"></script>
+  <script src="chat.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,797 @@
+/* Modern Dark Theme for Scientific Calculator & Secret Chat */
+:root {
+  --bg-primary: #121316;
+  --bg-secondary: #1e2025;
+  --bg-card: #272a32;
+  --border-color: #353945;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --accent-blue: #3b82f6;
+  --accent-green: #10b981;
+  --accent-red: #ef4444;
+  --accent-amber: #f59e0b;
+  --calc-fn: #2b303c;
+  --calc-op: #4f46e5;
+  --calc-eq: #2563eb;
+  --calc-num: #1f232b;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  overflow-x: hidden;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ==================================================== */
+/* DISGUISE WRAPPER: Aptitude & Scientific Calculator   */
+/* ==================================================== */
+.disguise-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 650px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.app-header {
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.header-branding {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-branding .icon {
+  font-size: 1.3rem;
+}
+
+.header-branding h1 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-main);
+}
+
+.nav-tabs {
+  display: flex;
+  background: var(--bg-card);
+  padding: 4px;
+  border-radius: 8px;
+  gap: 4px;
+}
+
+.nav-tab {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.nav-tab.active {
+  background: var(--bg-primary);
+  color: var(--text-main);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* Calculator Section */
+.calc-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  justify-content: center;
+}
+
+.calc-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+.calc-display-container {
+  background: #0d0e11;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 16px;
+  text-align: right;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.calc-sub-display {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  min-height: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.calc-main-display {
+  font-size: 2.2rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: #fff;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+/* Keypad Grid */
+.calc-keypad {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+}
+
+.calc-btn {
+  aspect-ratio: 1.25 / 1;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: filter 0.1s, transform 0.08s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calc-btn:active {
+  transform: scale(0.96);
+  filter: brightness(1.25);
+}
+
+.fn-btn {
+  background-color: var(--calc-fn);
+  color: #93c5fd;
+  font-size: 0.95rem;
+}
+
+.num-btn {
+  background-color: var(--calc-num);
+  font-size: 1.2rem;
+}
+
+.op-btn {
+  background-color: var(--calc-op);
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.del-btn {
+  background-color: #7c2d12;
+  color: #fca5a5;
+  font-size: 0.9rem;
+}
+
+.ac-btn {
+  background-color: #991b1b;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.eq-btn {
+  background-color: var(--calc-eq);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.span-2 {
+  grid-column: span 2;
+  aspect-ratio: auto;
+}
+
+/* Disguised Footer */
+.disguise-footer {
+  margin-top: 18px;
+  text-align: right;
+  padding: 0 4px;
+}
+
+.version-watermark {
+  font-size: 0.72rem;
+  color: #6b7280;
+  letter-spacing: 0.5px;
+  user-select: none;
+}
+
+/* Aptitude Cheat Sheet */
+.aptitude-section {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.formula-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.formula-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.formula-card h3 {
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+  color: #60a5fa;
+}
+
+.formula-math {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #34d399;
+  margin: 4px 0;
+}
+
+.formula-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.quick-solver {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.quick-solver input {
+  flex: 1;
+  min-width: 80px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: #fff;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 0.82rem;
+}
+
+.solver-btn {
+  background: var(--accent-blue);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.solver-result {
+  width: 100%;
+  font-size: 0.85rem;
+  color: #fbbf24;
+  margin-top: 4px;
+}
+
+/* ==================================================== */
+/* SECRET CHAT CONTAINER                                */
+/* ==================================================== */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 650px;
+  margin: 0 auto;
+  width: 100%;
+  background: #0f1013;
+}
+
+.chat-header {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.peer-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.peer-avatar {
+  width: 38px;
+  height: 38px;
+  background: #1e3a5f;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.peer-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.peer-status {
+  font-size: 0.72rem;
+  color: var(--accent-green);
+}
+
+.chat-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.action-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 7px 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.action-btn:hover {
+  background: #374151;
+}
+
+.panic-btn {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.lock-btn {
+  background: #1e3a8a;
+  border-color: #3b82f6;
+  color: #fff;
+  font-weight: 500;
+}
+
+/* Messages Flow */
+.messages-flow {
+  flex: 1;
+  padding: 14px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chat-empty-hint {
+  margin: auto;
+  text-align: center;
+  color: var(--text-muted);
+  max-width: 280px;
+}
+
+.chat-empty-hint .empty-icon {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+}
+
+.chat-empty-hint .subhint {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 6px;
+}
+
+.chat-bubble {
+  max-width: 78%;
+  padding: 9px 12px;
+  border-radius: 14px;
+  position: relative;
+  word-break: break-word;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.chat-bubble.purged {
+  transition: all 0.4s ease;
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.chat-bubble.theirs {
+  align-self: flex-start;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-bottom-left-radius: 3px;
+}
+
+.chat-bubble.mine {
+  align-self: flex-end;
+  background: #2563eb;
+  color: #fff;
+  border-bottom-right-radius: 3px;
+}
+
+.bubble-sender {
+  font-size: 0.72rem;
+  font-weight: 600;
+  margin-bottom: 3px;
+  color: #93c5fd;
+}
+
+.bubble-content {
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+
+.chat-media-img {
+  max-width: 100%;
+  max-height: 250px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: block;
+  margin: 4px 0;
+}
+
+.chat-media-audio {
+  max-width: 100%;
+  height: 36px;
+  margin: 4px 0;
+}
+
+.bubble-meta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-top: 4px;
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.bubble-timer {
+  background: rgba(0, 0, 0, 0.35);
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-weight: 600;
+  color: #fde047;
+}
+
+.bubble-timer.urgent {
+  background: rgba(220, 38, 38, 0.4);
+  color: #fca5a5;
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+  from { opacity: 0.7; }
+  to { opacity: 1; }
+}
+
+.bubble-unread-badge {
+  font-size: 0.65rem;
+  opacity: 0.8;
+}
+
+/* Security Banner */
+.security-banner {
+  background: #17191e;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 6px 12px;
+  font-size: 0.72rem;
+  color: #9ca3af;
+  text-align: center;
+}
+
+/* Chat Footer Input */
+.chat-footer {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hidden-input {
+  display: none;
+}
+
+.input-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--text-main);
+  transition: all 0.15s;
+}
+
+.mic-btn.recording {
+  background: var(--accent-red);
+  animation: pulse 0.7s infinite alternate;
+}
+
+.chat-footer input[type="text"] {
+  flex: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 9px 14px;
+  color: #fff;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.chat-footer input[type="text"]:focus {
+  border-color: var(--accent-blue);
+}
+
+.send-btn {
+  background: var(--accent-blue);
+  color: #fff;
+  border: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==================================================== */
+/* MODALS: Calls & Settings                            */
+/* ==================================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.modal-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 20px;
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.modal-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-group label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.form-group input {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: #fff;
+  font-size: 0.88rem;
+  outline: none;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.btn-primary {
+  flex: 1;
+  background: var(--accent-blue);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background: var(--bg-card);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+/* Incoming Call */
+.call-alert {
+  text-align: center;
+  align-items: center;
+}
+
+.pulsing-call-icon {
+  font-size: 2.8rem;
+  margin: 10px 0;
+  animation: pulse 0.8s infinite alternate;
+}
+
+.call-actions-row {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.call-btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-accept {
+  background: var(--accent-green);
+  color: #fff;
+}
+
+.btn-reject {
+  background: var(--accent-red);
+  color: #fff;
+}
+
+/* Active Call Full Window */
+.active-call-window {
+  background: #000;
+  width: 100%;
+  max-width: 450px;
+  height: 80vh;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.video-container {
+  flex: 1;
+  position: relative;
+  background: #111;
+}
+
+.remote-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.local-video {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 100px;
+  height: 140px;
+  background: #222;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.call-hud {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+#callStatusText {
+  color: #fff;
+  font-size: 0.85rem;
+}
+
+.call-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.hud-btn {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.btn-hangup {
+  background: var(--accent-red);
+}
+
+@media (max-width: 480px) {
+  .calc-btn {
+    font-size: 0.95rem;
+  }
+  .num-btn {
+    font-size: 1.1rem;
+  }
+}
