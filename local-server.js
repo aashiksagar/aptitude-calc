@@ -269,19 +269,20 @@ const server = http.createServer(async (req, res) => {
   }
 
   // --- Static File Serving ---
-  let filePath = path.join(PUBLIC_DIR, pathname === '/' ? 'index.html' : pathname);
-  
-  // Prevent directory traversal
-  if (!filePath.startsWith(PUBLIC_DIR)) {
-    res.writeHead(403, { 'Content-Type': 'text/plain' });
-    return res.end('Access Forbidden');
+  const cleanPath = pathname === '/' ? 'index.html' : pathname.replace(/^\//, '');
+  let filePath = path.join(PUBLIC_DIR, cleanPath);
+
+  if (!fs.existsSync(filePath)) {
+    filePath = path.join(__dirname, cleanPath);
   }
 
-  fs.stat(filePath, (err, stats) => {
-    if (err || !stats.isFile()) {
-      // Fallback to index.html for SPA routing
-      filePath = path.join(PUBLIC_DIR, 'index.html');
+  // Fallback to index.html if not found
+  if (!fs.existsSync(filePath)) {
+    filePath = path.join(PUBLIC_DIR, 'index.html');
+    if (!fs.existsSync(filePath)) {
+      filePath = path.join(__dirname, 'index.html');
     }
+  }
 
     const ext = path.extname(filePath).toLowerCase();
     const contentType = MIME_TYPES[ext] || 'application/octet-stream';
